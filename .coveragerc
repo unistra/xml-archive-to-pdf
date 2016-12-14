@@ -1,0 +1,6 @@
+[run]
+source =
+    xml_archive_to_pdf
+
+[report]
+omit = */tests/*
