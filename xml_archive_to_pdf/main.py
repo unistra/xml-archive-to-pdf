@@ -1,8 +1,8 @@
 """
-Reharpdf
+xml-archive-to-pdf
 
 Usage:
-    reharpdf <xml>
+    xml-archive-to-pdf <xml>
 
 Options:
     -h --help  aide
