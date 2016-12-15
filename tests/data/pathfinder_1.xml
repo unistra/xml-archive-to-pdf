@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Racine du fichier, id et source sont optionnels, le name correspond au titre -->
-<personnage xmlns="unistra:archive" id="1" source="pathfinder" name="document récapitulatif du personnage 1 de pathfinder">
+<personnage xmlns="fr:unistra:di:archive:pathfinder:v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="fr:unistra:di:archive:pathfinder:v1 pathfinder_v1.xsd"
+    id="1" source="pathfinder" name="document récapitulatif du personnage 1 de pathfinder">
     <!-- Affiche le sous-titre de l'état civil -->
     <etat-civil name="son état civil">
         <!-- Affichage de clés/valeurs -->
