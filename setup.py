@@ -22,7 +22,7 @@ setup(
     maintainer_email='di-dip@unistra.fr',
     url='https://github.com/unistra/xml-archive-to-pdf',
     license='PSF',
-    description='',
+    description="Transformation d'un fichier xml de type unistra:archive en fichier pdf",
     long_description=long_description,
     packages=find_packages(),
     download_url='https://github.com/unistra/xml-archive-to-pdf',
