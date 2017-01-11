@@ -6,6 +6,8 @@ Transformation d'un fichier xml de type *unistra:archive* en fichier pdf
 Installation
 ------------
 
+TODO : à déployer sur pypi
+
 .. code-block:: bash
 
     pip install xml-archive-to-pdf
