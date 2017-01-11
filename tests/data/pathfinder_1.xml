@@ -16,7 +16,7 @@
             </classe>
             <!-- Ici name est vide, donc ça affiche un titre vide -->
             <classe name="">
-                <nom>Voleur Hybride</nom>
+                <nom>Prêtre combattant</nom>
                 <niveau>1</niveau>
             </classe>
             <!-- Lorsqu'il n'y a pas d'attribut name, on affiche le nom du tag. Ici classe -->

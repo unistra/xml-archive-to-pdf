@@ -17,11 +17,12 @@ from .utils import build_pdf
 import sys
 
 
-def main():
+def main(args=None):
     try:
-        args = docopt(__doc__)
-        xml_file = args["--input"]
-        pdf_file = args["--output"]
+        if not args:
+            args = docopt(__doc__)
+        xml_file = args.get("--input")
+        pdf_file = args.get("--output")
         logo_file = args.get("--logo")
         build_pdf(xml_file, pdf_file, logo_file)
     except Exception as e:

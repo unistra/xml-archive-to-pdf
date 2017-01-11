@@ -15,7 +15,7 @@ Usage
 
 .. code-block:: bash
 
-    cat tests/data/pathfinder_1.xml | xargs -0 xml-archive-to-pdf
+    xml-archive-to-pdf -i tests/data/pathfinder_1.xml -o /tmp/pathfinder_1.pdf --logo tests/data/logo.png
 
 Documentation
 -------------
@@ -31,7 +31,6 @@ On aura principalement :
 * Des blocs séparés par des titres
 * Des clés avec un intitulé parlant
 * Des valeurs
-* Quelques types de mise en formes simples (tableau par exemple)
 
 
 Exemple d'un fichier xml
@@ -57,7 +56,7 @@ Exemple d'un fichier xml
                 </classe>
                 <!-- Ici name est vide, donc ça affiche un titre vide -->
                 <classe name="">
-                    <nom>Voleur</nom>
+                    <nom>Prêtre combattant</nom>
                     <niveau>1</niveau>
                 </classe>
                 <!-- Lorsqu'il n'y a pas d'attribut name, on affiche le nom du tag. Ici classe -->
@@ -79,5 +78,4 @@ TODO
 attributs
 #########
 
-name : intitulé parlant
-type : title|table (default title), utilisé pour
+name : intitulé parlant qui servira de label/titre à la place du nom du tag
