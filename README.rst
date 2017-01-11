@@ -1,6 +1,18 @@
 xml-archive-to-pdf
 ==================
 
+.. image:: https://travis-ci.org/unistra/xml-archive-to-pdf.svg?branch=master
+    :target: https://travis-ci.org/unistra/xml-archive-to-pdf
+    :alt: Build
+
+.. image:: http://coveralls.io/repos/unistra/xml-archive-to-pdf/badge.png?branch=master
+    :target: http://coveralls.io/r/unistra/xml-archive-to-pdf?branch=master
+    :alt: Coverage
+
+.. image:: https://img.shields.io/badge/python-3.4-blue.svg
+    :target: https://www.python.org/download/releases/3.4.0/
+    :alt: Python 3.4
+
 Transformation d'un fichier xml de type *unistra:archive* en fichier pdf
 
 Installation
