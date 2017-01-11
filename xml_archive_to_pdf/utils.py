@@ -3,11 +3,9 @@ All utils
 """
 import xml.etree.cElementTree as ET
 import re
-from reportlab.lib.enums import TA_JUSTIFY, TA_RIGHT, TA_LEFT, TA_CENTER
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.units import cm
 from reportlab.lib import colors
 
 
@@ -62,44 +60,45 @@ def get_styles():
     styles.add(ParagraphStyle(name='cHeading4', parent=styles['Heading4'], spaceBefore=10, borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#b3c6ff"), backColor=colors.HexColor("#b3c6ff")))
     styles.add(ParagraphStyle(name='cHeading5', parent=styles['Heading5'], spaceBefore=10, borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#ccd9ff"), backColor=colors.HexColor("#ccd9ff")))
     styles.add(ParagraphStyle(name='cHeading6', parent=styles['Heading6'], spaceBefore=10, borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#e6ecff"), backColor=colors.HexColor("#e6ecff")))
-
     return styles
 
 
+def write_elem(Story, e, level, styles):
+    """ write element in the pdf """
+    # get label and value
+    label = e.attrib.get("name") if e.attrib.get("name") is not None else get_bare_tag(e)
+    value = get_clean_text(e)
+    has_children = True if e.getchildren() else False
+    # Gestion des titres: un titre est un élément avec des enfants
+    if has_children:
+        # Si on a un label non vide, on l'affiche
+        if label:
+            Story.append(Paragraph(label, styles[get_title_style(level)]))
+        # Si on a forcé le nom du label à vide, on met juste un petit espace
+        else:
+            Story.append(Spacer(1, 6))
+    # C'est un element de type clé-valeur, on l'affiche normalement
+    else:
+        if label or value:
+            Story.append(Paragraph("{}: {}".format(label, value), styles["Normal"]))
+    return Story
+
+
 def build_pdf(xml_file, pdf_file):
-    # pdf buffer
+    # Build the doc and the story
     doc = get_doc(pdf_file)
     styles = get_styles()
     Story = []
-
     # events and level for lxml
     level = 0
     # Parse the full xml
     for action, e in ET.iterparse(xml_file, events=("start", "end")):
         # If a new element is encountered
         if ET.iselement(e) and action == 'start':
-            # get label and value
-            label = e.attrib.get("name") if e.attrib.get("name") is not None else get_bare_tag(e)
-            value = get_clean_text(e)
-            has_children = True if e.getchildren() else False
-
-            # Gestion des titres: un titre est un élément avec des enfants
-            if has_children:
-                # Si on a un label non vide, on l'affiche
-                if label:
-                    Story.append(Paragraph(label, styles[get_title_style(level)]))
-                # Si on a forcé le nom du label à vide, on met juste un petit espace
-                else:
-                    Story.append(Spacer(1, 6))
-            # C'est un element de type clé-valeur, on l'affiche normalement
-            else:
-                if label or value:
-                    Story.append(Paragraph("{}: {}".format(label, value), styles["Normal"]))
-
+            Story = write_elem(Story, e, level, styles)
         # Calcul the level
         if (action == 'start'):
             level += 1
         elif (action == 'end'):
             level -= 1
-
     doc.build(Story)
