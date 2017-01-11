@@ -34,11 +34,11 @@ setup(
             'xml-archive-to-pdf = xml_archive_to_pdf.main:main',
         ],
     },
-    classifiers=(
-        'Development Status :: 3 - Alpha',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python :: 3.4'
-    )
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: BSD License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3.4"
+    ]
 )
