@@ -4,8 +4,9 @@ All utils
 import xml.etree.cElementTree as ET
 import re
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
 from .styles import get_styles, get_title_style, get_normal_style
+from reportlab.lib.units import cm
 
 
 def get_bare_tag(elem):
@@ -34,6 +35,14 @@ def has_children(e):
     return True if e.getchildren() else False
 
 
+def add_logo(Story, logo_file):
+    """ add a logo """
+    im = Image(logo_file)
+    im.hAlign = 'RIGHT'
+    Story.append(im)
+    Story.append(Spacer(1, 12))
+
+
 def write_elem(Story, e, level, styles):
     """ write element in the pdf """
     # get label and value
@@ -54,7 +63,7 @@ def write_elem(Story, e, level, styles):
     return Story
 
 
-def build_pdf(xml_file, pdf_file):
+def build_pdf(xml_file, pdf_file, logo_file=None):
     """ build the pdf file """
     # Build the doc and the story
     doc = get_doc(pdf_file)
@@ -62,6 +71,11 @@ def build_pdf(xml_file, pdf_file):
     Story = []
     # events and level for lxml
     level = 0
+
+    # Add logo
+    if logo_file:
+        add_logo(Story, logo_file)
+
     # Parse the full xml
     for action, e in ET.iterparse(xml_file, events=("start", "end")):
         # If a new element is encountered
