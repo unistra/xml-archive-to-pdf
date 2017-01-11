@@ -11,7 +11,6 @@ Options:
 """
 
 from docopt import docopt
-#from .settings import *
 from .utils import build_pdf
 import sys
 
