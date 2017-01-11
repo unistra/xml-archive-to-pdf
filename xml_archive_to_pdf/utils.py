@@ -54,12 +54,18 @@ def get_styles():
     """
     styles = getSampleStyleSheet()
     styles.add(ParagraphStyle(name='cTitle', parent=styles['Title'], spaceAfter=24))
-    styles.add(ParagraphStyle(name='cHeading1', parent=styles['Heading1'], spaceBefore=10, borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#668cff"), backColor=colors.HexColor("#668cff")))
-    styles.add(ParagraphStyle(name='cHeading2', parent=styles['Heading2'], spaceBefore=10, borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#809fff"), backColor=colors.HexColor("#809fff")))
-    styles.add(ParagraphStyle(name='cHeading3', parent=styles['Heading3'], spaceBefore=10, borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#99b3ff"), backColor=colors.HexColor("#99b3ff")))
-    styles.add(ParagraphStyle(name='cHeading4', parent=styles['Heading4'], spaceBefore=10, borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#b3c6ff"), backColor=colors.HexColor("#b3c6ff")))
-    styles.add(ParagraphStyle(name='cHeading5', parent=styles['Heading5'], spaceBefore=10, borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#ccd9ff"), backColor=colors.HexColor("#ccd9ff")))
-    styles.add(ParagraphStyle(name='cHeading6', parent=styles['Heading6'], spaceBefore=10, borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#e6ecff"), backColor=colors.HexColor("#e6ecff")))
+    styles.add(ParagraphStyle(name='cHeading1', parent=styles['Heading1'], spaceBefore=10,
+        borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#668cff"), backColor=colors.HexColor("#668cff")))
+    styles.add(ParagraphStyle(name='cHeading2', parent=styles['Heading2'], spaceBefore=10,
+        borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#809fff"), backColor=colors.HexColor("#809fff")))
+    styles.add(ParagraphStyle(name='cHeading3', parent=styles['Heading3'], spaceBefore=10,
+        borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#99b3ff"), backColor=colors.HexColor("#99b3ff")))
+    styles.add(ParagraphStyle(name='cHeading4', parent=styles['Heading4'], spaceBefore=10,
+        borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#b3c6ff"), backColor=colors.HexColor("#b3c6ff")))
+    styles.add(ParagraphStyle(name='cHeading5', parent=styles['Heading5'], spaceBefore=10,
+        borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#ccd9ff"), backColor=colors.HexColor("#ccd9ff")))
+    styles.add(ParagraphStyle(name='cHeading6', parent=styles['Heading6'], spaceBefore=10,
+        borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#e6ecff"), backColor=colors.HexColor("#e6ecff")))
     return styles
 
 
