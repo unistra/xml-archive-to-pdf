@@ -70,8 +70,6 @@ Exemple d'un fichier xml
         </etat-civil>
     </personnage>
 
-
-
 Légende de l'exemple
 ********************
 
@@ -81,3 +79,8 @@ attributs
 #########
 
 name : intitulé parlant qui servira de label/titre à la place du nom du tag
+
+Résultat
+********
+
+* `Fichier pdf de l'exemple <https://github.com/unistra/xml-archive-to-pdf/blob/master/tests/data/pathfinder_1.pdf>`_
