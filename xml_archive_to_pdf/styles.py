@@ -1,5 +1,7 @@
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus import TableStyle
+from .settings import *
 
 
 def get_styles():
@@ -21,27 +23,27 @@ def get_styles():
     """
     styles = getSampleStyleSheet()
     # Titles
-    styles.add(ParagraphStyle(name='cTitle', parent=styles['Title'], spaceAfter=24))
-    styles.add(ParagraphStyle(name='cHeading1', parent=styles['Heading1'], spaceBefore=10,
+    styles.add(ParagraphStyle(name='cTitle', parent=styles['Title'], spaceAfter=SPACE_UNIT*2))
+    styles.add(ParagraphStyle(name='cHeading1', parent=styles['Heading1'], spaceBefore=SPACE_UNIT,
         borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#668cff"), backColor=colors.HexColor("#668cff")))
-    styles.add(ParagraphStyle(name='cHeading2', parent=styles['Heading2'], spaceBefore=10, leftIndent=12,
+    styles.add(ParagraphStyle(name='cHeading2', parent=styles['Heading2'], spaceBefore=SPACE_UNIT, leftIndent=SPACE_UNIT,
         borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#809fff"), backColor=colors.HexColor("#809fff")))
-    styles.add(ParagraphStyle(name='cHeading3', parent=styles['Heading3'], spaceBefore=10, leftIndent=24,
+    styles.add(ParagraphStyle(name='cHeading3', parent=styles['Heading3'], spaceBefore=SPACE_UNIT, leftIndent=SPACE_UNIT*2,
         borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#99b3ff"), backColor=colors.HexColor("#99b3ff")))
-    styles.add(ParagraphStyle(name='cHeading4', parent=styles['Heading4'], spaceBefore=10, leftIndent=36,
+    styles.add(ParagraphStyle(name='cHeading4', parent=styles['Heading4'], spaceBefore=SPACE_UNIT, leftIndent=SPACE_UNIT*3,
         borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#b3c6ff"), backColor=colors.HexColor("#b3c6ff")))
-    styles.add(ParagraphStyle(name='cHeading5', parent=styles['Heading5'], spaceBefore=10, leftIndent=48,
+    styles.add(ParagraphStyle(name='cHeading5', parent=styles['Heading5'], spaceBefore=SPACE_UNIT, leftIndent=SPACE_UNIT*4,
         borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#ccd9ff"), backColor=colors.HexColor("#ccd9ff")))
-    styles.add(ParagraphStyle(name='cHeading6', parent=styles['Heading6'], spaceBefore=10, leftIndent=60,
+    styles.add(ParagraphStyle(name='cHeading6', parent=styles['Heading6'], spaceBefore=SPACE_UNIT, leftIndent=SPACE_UNIT*5,
         borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#e6ecff"), backColor=colors.HexColor("#e6ecff")))
     # Normals
     styles.add(ParagraphStyle(name='cNormal', parent=styles['Normal']))
-    styles.add(ParagraphStyle(name='cNormal1', leftIndent=12, parent=styles['Normal']))
-    styles.add(ParagraphStyle(name='cNormal2', leftIndent=24, parent=styles['Normal'])),
-    styles.add(ParagraphStyle(name='cNormal3', leftIndent=36, parent=styles['Normal'])),
-    styles.add(ParagraphStyle(name='cNormal4', leftIndent=48, parent=styles['Normal'])),
-    styles.add(ParagraphStyle(name='cNormal5', leftIndent=60, parent=styles['Normal'])),
-    styles.add(ParagraphStyle(name='cNormal6', leftIndent=72, parent=styles['Normal'])),
+    styles.add(ParagraphStyle(name='cNormal1', leftIndent=SPACE_UNIT, parent=styles['Normal']))
+    styles.add(ParagraphStyle(name='cNormal2', leftIndent=SPACE_UNIT*2, parent=styles['Normal'])),
+    styles.add(ParagraphStyle(name='cNormal3', leftIndent=SPACE_UNIT*3, parent=styles['Normal'])),
+    styles.add(ParagraphStyle(name='cNormal4', leftIndent=SPACE_UNIT*4, parent=styles['Normal'])),
+    styles.add(ParagraphStyle(name='cNormal5', leftIndent=SPACE_UNIT*5, parent=styles['Normal'])),
+    styles.add(ParagraphStyle(name='cNormal6', leftIndent=SPACE_UNIT*6, parent=styles['Normal'])),
 
     return styles
 
@@ -64,3 +66,16 @@ def get_normal_style(styles, level):
         return styles["{}{}".format("cNormal", str(level))]
     else:
         return styles["cNormal6"]
+
+
+def get_table_style(level):
+    """ get table style """
+    return TableStyle([
+        ('FONT', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        # ('LINEABOVE', (0,0), (-1,0), 2, "#99b3ff"),
+        # ('LINEABOVE', (0,1), (-1,-1), 0.25, colors.black),
+        # ('LINEBELOW', (0,-1), (-1,-1), 2, "#99b3ff"),
+        ('ALIGN', (1,1), (-1,-1), 'RIGHT'),
+        ('INNERGRID', (0,0), (-1,-1), 0.25, colors.HexColor("#ccd9ff")),
+        ('BOX', (0,0), (-1,-1), 2, "#99b3ff")
+    ], hAlign='LEFT')

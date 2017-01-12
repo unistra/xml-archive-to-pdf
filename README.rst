@@ -78,6 +78,27 @@ Exemple d'un fichier xml
                 </classe>
             </classes>
         </etat-civil>
+        <!-- Element de style tableau -->
+        <armes style="table" name="Liste des armes">
+            <arme>
+                <nom>cimeterre</nom>
+                <type>à deux mains</type>
+                <portee name="portée">3</portee>
+                <degat name="dégât">7</degat>
+            </arme>
+            <arme>
+                <nom>arc</nom>
+                <type>à distance</type>
+                <portee name="portée">8</portee>
+                <degat name="dégât">2</degat>
+            </arme>
+            <arme>
+                <nom>épée</nom>
+                <type>à une main</type>
+                <portee name="portée">5</portee>
+                <degat name="dégât">3</degat>
+            </arme>
+        </armes>
     </personnage>
 
 Légende de l'exemple
@@ -86,7 +107,11 @@ Légende de l'exemple
 attributs
 #########
 
-name : intitulé parlant qui servira de label/titre à la place du nom du tag
+* name : intitulé parlant qui servira de label/titre à la place du nom du tag
+* style : style d'un bloc
+
+  * table: affichage sous forme d'un tableau
+
 
 Résultat
 ********
