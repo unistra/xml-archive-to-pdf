@@ -71,10 +71,8 @@ def get_normal_style(styles, level):
 def get_table_style(level):
     """ get table style """
     return TableStyle([
+        ('BACKGROUND',(0,0),(-1,0),colors.HexColor("#ccd9ff")),
         ('FONT', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        # ('LINEABOVE', (0,0), (-1,0), 2, "#99b3ff"),
-        # ('LINEABOVE', (0,1), (-1,-1), 0.25, colors.black),
-        # ('LINEBELOW', (0,-1), (-1,-1), 2, "#99b3ff"),
         ('ALIGN', (1,1), (-1,-1), 'RIGHT'),
         ('INNERGRID', (0,0), (-1,-1), 0.25, colors.HexColor("#ccd9ff")),
         ('BOX', (0,0), (-1,-1), 2, "#99b3ff")
