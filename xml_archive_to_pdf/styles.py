@@ -4,7 +4,7 @@ from reportlab.platypus import TableStyle
 from .settings import *
 
 
-def get_styles():
+def get_styles(fontFamily=DEFAULT_FONT):
     """
     get styles for the pdf, default are :
     Title: <ParagraphStyle ‘Title’>
@@ -14,36 +14,41 @@ def get_styles():
     Heading4: <ParagraphStyle ‘Heading4’>
     Heading5: <ParagraphStyle ‘Heading5’>
     Heading6: <ParagraphStyle ‘Heading6’>
-    Bullet: <ParagraphStyle ‘Bullet’>
-    Definition: <ParagraphStyle ‘Definition’>
     Normal: <ParagraphStyle ‘Normal’>
     Italic: <ParagraphStyle ‘Italic’>
     BodyText: <ParagraphStyle ‘BodyText’>
+    unused:
+    Bullet: <ParagraphStyle ‘Bullet’>
+    Definition: <ParagraphStyle ‘Definition’>
     Code: <ParagraphStyle ‘Code’>
     """
     styles = getSampleStyleSheet()
     # Titles
-    styles.add(ParagraphStyle(name='cTitle', parent=styles['Title'], spaceAfter=SPACE_UNIT*2))
-    styles.add(ParagraphStyle(name='cHeading1', parent=styles['Heading1'], spaceBefore=SPACE_UNIT,
+    styles.add(ParagraphStyle(name='cTitle', parent=styles['Title'], fontName="{}-Bold".format(fontFamily), spaceAfter=SPACE_UNIT*2))
+    styles.add(ParagraphStyle(name='cHeading1', parent=styles['Heading1'], fontName="{}-Bold".format(fontFamily), spaceBefore=SPACE_UNIT,
         borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#668cff"), backColor=colors.HexColor("#668cff")))
-    styles.add(ParagraphStyle(name='cHeading2', parent=styles['Heading2'], spaceBefore=SPACE_UNIT, leftIndent=SPACE_UNIT,
+    styles.add(ParagraphStyle(name='cHeading2', parent=styles['Heading2'], fontName="{}-Bold".format(fontFamily), spaceBefore=SPACE_UNIT, leftIndent=SPACE_UNIT,
         borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#809fff"), backColor=colors.HexColor("#809fff")))
-    styles.add(ParagraphStyle(name='cHeading3', parent=styles['Heading3'], spaceBefore=SPACE_UNIT, leftIndent=SPACE_UNIT*2,
+    styles.add(ParagraphStyle(name='cHeading3', parent=styles['Heading3'], fontName="{}-BoldOblique".format(fontFamily), spaceBefore=SPACE_UNIT, leftIndent=SPACE_UNIT*2,
         borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#99b3ff"), backColor=colors.HexColor("#99b3ff")))
-    styles.add(ParagraphStyle(name='cHeading4', parent=styles['Heading4'], spaceBefore=SPACE_UNIT, leftIndent=SPACE_UNIT*3,
+    styles.add(ParagraphStyle(name='cHeading4', parent=styles['Heading4'], fontName="{}-BoldOblique".format(fontFamily), spaceBefore=SPACE_UNIT, leftIndent=SPACE_UNIT*3,
         borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#b3c6ff"), backColor=colors.HexColor("#b3c6ff")))
-    styles.add(ParagraphStyle(name='cHeading5', parent=styles['Heading5'], spaceBefore=SPACE_UNIT, leftIndent=SPACE_UNIT*4,
+    styles.add(ParagraphStyle(name='cHeading5', parent=styles['Heading5'], fontName="{}-Bold".format(fontFamily), spaceBefore=SPACE_UNIT, leftIndent=SPACE_UNIT*4,
         borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#ccd9ff"), backColor=colors.HexColor("#ccd9ff")))
-    styles.add(ParagraphStyle(name='cHeading6', parent=styles['Heading6'], spaceBefore=SPACE_UNIT, leftIndent=SPACE_UNIT*5,
+    styles.add(ParagraphStyle(name='cHeading6', parent=styles['Heading6'], fontName="{}-Bold".format(fontFamily), spaceBefore=SPACE_UNIT, leftIndent=SPACE_UNIT*5,
         borderRadius=5, borderWidth=1, borderPadding=4, borderColor=colors.HexColor("#e6ecff"), backColor=colors.HexColor("#e6ecff")))
     # Normals
-    styles.add(ParagraphStyle(name='cNormal', parent=styles['Normal']))
-    styles.add(ParagraphStyle(name='cNormal1', leftIndent=SPACE_UNIT, parent=styles['Normal']))
-    styles.add(ParagraphStyle(name='cNormal2', leftIndent=SPACE_UNIT*2, parent=styles['Normal'])),
-    styles.add(ParagraphStyle(name='cNormal3', leftIndent=SPACE_UNIT*3, parent=styles['Normal'])),
-    styles.add(ParagraphStyle(name='cNormal4', leftIndent=SPACE_UNIT*4, parent=styles['Normal'])),
-    styles.add(ParagraphStyle(name='cNormal5', leftIndent=SPACE_UNIT*5, parent=styles['Normal'])),
-    styles.add(ParagraphStyle(name='cNormal6', leftIndent=SPACE_UNIT*6, parent=styles['Normal'])),
+    styles.add(ParagraphStyle(name='cNormal', fontName=fontFamily, parent=styles['Normal']))
+    styles.add(ParagraphStyle(name='cNormal1', fontName=fontFamily, leftIndent=SPACE_UNIT, parent=styles['Normal']))
+    styles.add(ParagraphStyle(name='cNormal2', fontName=fontFamily, leftIndent=SPACE_UNIT*2, parent=styles['Normal'])),
+    styles.add(ParagraphStyle(name='cNormal3', fontName=fontFamily, leftIndent=SPACE_UNIT*3, parent=styles['Normal'])),
+    styles.add(ParagraphStyle(name='cNormal4', fontName=fontFamily, leftIndent=SPACE_UNIT*4, parent=styles['Normal'])),
+    styles.add(ParagraphStyle(name='cNormal5', fontName=fontFamily, leftIndent=SPACE_UNIT*5, parent=styles['Normal'])),
+    styles.add(ParagraphStyle(name='cNormal6', fontName=fontFamily, leftIndent=SPACE_UNIT*6, parent=styles['Normal'])),
+    # BodyText
+    styles.add(ParagraphStyle(name='cBodyText', fontName=fontFamily, parent=styles['BodyText']))
+    # Italic
+    styles.add(ParagraphStyle(name='cItalic', fontName=fontFamily, parent=styles['Italic']))
 
     return styles
 
@@ -55,7 +60,7 @@ def get_title_style(styles, level):
     elif level in [1, 2, 3, 4, 5, 6]:
         return styles["{}{}".format("cHeading", str(level))]
     else:
-        return styles["Italic"]
+        return styles["cItalic"]
 
 
 def get_normal_style(styles, level):
@@ -72,8 +77,7 @@ def get_table_style(level):
     """ get table style """
     return TableStyle([
         ('BACKGROUND',(0,0),(-1,0),colors.HexColor("#ccd9ff")),
-        ('FONT', (0, 0), (-1, 0), 'Helvetica-Bold'),
         ('ALIGN', (1,1), (-1,-1), 'RIGHT'),
         ('INNERGRID', (0,0), (-1,-1), 0.25, colors.HexColor("#ccd9ff")),
         ('BOX', (0,0), (-1,-1), 2, "#99b3ff")
-    ], hAlign='LEFT',wordWrap = 'LTR')
+    ], hAlign='LEFT', wordWrap='LTR')

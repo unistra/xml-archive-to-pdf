@@ -27,7 +27,7 @@ Usage
 
 .. code-block:: bash
 
-    xml-archive-to-pdf -i tests/data/pathfinder_1.xml -o /tmp/pathfinder_1.pdf --logo tests/data/logo.png
+    xml-archive-to-pdf -i tests/data/pathfinder_1.xml -o /tmp/pathfinder_1.pdf --logo tests/data/logo.png --font tests/data/CustomFont
 
 Documentation
 -------------
@@ -138,3 +138,14 @@ Résultat
 ********
 
 * `Fichier pdf de l'exemple <https://github.com/unistra/xml-archive-to-pdf/blob/master/tests/data/pathfinder_1.pdf>`_
+
+Autres
+*******
+* --logo : le paramètre logo est optionnel et permet de rajouter un logo sur le document en haut à droite
+* --font : le paramètre font est optionnel et permet de remplacer la font par défaut par une autre font
+  Attention, le dossier qui contiendra la font doit obligatoirement avoir les 4 fichiers suivants:
+  
+  * CustomFont-BoldOblique.ttf
+  * CustomFont-Bold.ttf
+  * CustomFont-Oblique.ttf
+  * CustomFont.ttf

@@ -8,6 +8,9 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, Tabl
 from .styles import get_styles, get_title_style, get_normal_style, get_table_style
 from .settings import *
 from reportlab.lib.units import mm
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from os.path import join
 
 
 def get_bare_tag(elem):
@@ -24,6 +27,22 @@ def get_doc(pdf_file):
     """ get the pdf doc """
     return SimpleDocTemplate(pdf_file, pagesize=letter, rightMargin=SPACE_UNIT*2,
                              leftMargin=SPACE_UNIT*2, topMargin=SPACE_UNIT*2, bottomMargin=SPACE_UNIT*2)
+
+
+def registerFont(fontFamilyName, folder_path):
+    """ register a font """
+    # Register a custom font
+    pdfmetrics.registerFont(TTFont('{}-Bold'.format(fontFamilyName), join(folder_path, "{}-Bold.ttf".format(fontFamilyName))))
+    pdfmetrics.registerFont(TTFont(fontFamilyName, join(folder_path, "{}.ttf".format(fontFamilyName))))
+    pdfmetrics.registerFont(TTFont('{}-Oblique'.format(fontFamilyName), join(folder_path, "{}-Oblique.ttf".format(fontFamilyName))))
+    pdfmetrics.registerFont(TTFont('{}-BoldOblique'.format(fontFamilyName), join(folder_path, "{}-BoldOblique.ttf".format(fontFamilyName))))
+    pdfmetrics.registerFontFamily(
+        fontFamilyName,
+        normal=fontFamilyName,
+        bold='{}-Bold'.format(fontFamilyName),
+        italic='{}-Italic'.format(fontFamilyName),
+        boldItalic='{}-BoldItalic'.format(fontFamilyName)
+    )
 
 
 def get_label(e):
@@ -63,7 +82,7 @@ def write_table(Story, e, level, styles):
     # On affiche le table
     if rows:
         # On récupère les titres du tableau à partir du 1er element
-        columns_names = list(map(lambda x: Paragraph(get_label(x), styles['BodyText']), rows[0].getchildren()))
+        columns_names = list(map(lambda x: Paragraph(get_label(x), styles['cBodyText']), rows[0].getchildren()))
         data.append(columns_names)
         colWidths = [((ptTomm(letter[0])-(SPACE_UNIT*2))/len(columns_names))*mm for i in range(0, len(columns_names))]
         # On parcourt les éléments pour les insérer dans le tableau
@@ -71,7 +90,7 @@ def write_table(Story, e, level, styles):
             values = row.getchildren()
             if len(columns_names) != len(values):
                 raise Exception("Table with columns {} has wrong elements".format(columns_names))
-            line_values = list(map(lambda x: Paragraph(get_clean_text(x), styles['BodyText']), row.getchildren()))
+            line_values = list(map(lambda x: Paragraph(get_clean_text(x), styles['cBodyText']), row.getchildren()))
             data.append(line_values)
     # Build the table
     t = Table(data, colWidths=colWidths)
@@ -121,11 +140,16 @@ def is_leaving_table(action, level, table_level):
     return action == EVENT_END and table_level[0] and table_level[1] == level
 
 
-def build_pdf(xml_file, pdf_file, logo_file=None):
+def build_pdf(xml_file, pdf_file, logo_file=None, font_folder=None):
     """ build the pdf file """
     # Build the doc and the story
     doc = get_doc(pdf_file)
-    styles = get_styles()
+    # register a font and get styles
+    if font_folder:
+        registerFont("CustomFont", font_folder)
+        styles = get_styles("CustomFont")
+    else:
+        styles = get_styles()
     Story = []
     # events and level for lxml
     level = 0
