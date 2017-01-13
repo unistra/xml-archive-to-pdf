@@ -16,10 +16,12 @@ class MainTest(unittest.TestCase):
         self.xml_file = "tests/data/pathfinder_1.xml"
         self.pdf_file = "tests/data/pathfinder_1.pdf"
         self.logo_file = "tests/data/logo.png"
+        self.font_folder = "tests/data/CustomFont"
         self.args = {
             "--input": self.xml_file,
             "--output": self.pdf_file,
-            "--logo": self.logo_file
+            "--logo": self.logo_file,
+            "--font": self.font_folder
         }
 
     def test_main(self):
