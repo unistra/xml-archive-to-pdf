@@ -33,18 +33,16 @@
             <type>à deux mains</type>
             <portee name="portée">3</portee>
             <degat name="dégât">7</degat>
-            <description>cimeterre</description>
-            <element>feu</element>
-            <rarete>épique</rarete>
+            <element name="élément">feu</element>
+            <rarete name="rareté">épique</rarete>
             <prix>1000</prix>
-            <qualite>très bonne</qualite>
+            <qualite name="qualité">très bonne</qualite>
         </arme>
         <arme>
             <nom>arc</nom>
             <type>à distance</type>
-            <portee name="portée">8</portee>
-            <degat name="dégât">2</degat>
-            <description>arc</description>
+            <portee>8</portee>
+            <degat>2</degat>
             <element>glace</element>
             <rarete>simple</rarete>
             <prix>100</prix>
@@ -53,9 +51,8 @@
         <arme>
             <nom>épée</nom>
             <type>à une main</type>
-            <portee name="portée">5</portee>
-            <degat name="dégât">3</degat>
-            <description>épée</description>
+            <portee>5</portee>
+            <degat>3</degat>
             <element>terre</element>
             <rarete>rare</rarete>
             <prix>500</prix>

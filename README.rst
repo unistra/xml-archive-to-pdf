@@ -85,18 +85,16 @@ Exemple d'un fichier xml
                 <type>à deux mains</type>
                 <portee name="portée">3</portee>
                 <degat name="dégât">7</degat>
-                <description>cimeterre</description>
-                <element>feu</element>
-                <rarete>épique</rarete>
+                <element name="élément">feu</element>
+                <rarete name="rareté">épique</rarete>
                 <prix>1000</prix>
-                <qualite>très bonne</qualite>
+                <qualite name="qualité">très bonne</qualite>
             </arme>
             <arme>
                 <nom>arc</nom>
                 <type>à distance</type>
-                <portee name="portée">8</portee>
-                <degat name="dégât">2</degat>
-                <description>arc</description>
+                <portee>8</portee>
+                <degat>2</degat>
                 <element>glace</element>
                 <rarete>simple</rarete>
                 <prix>100</prix>
@@ -105,9 +103,8 @@ Exemple d'un fichier xml
             <arme>
                 <nom>épée</nom>
                 <type>à une main</type>
-                <portee name="portée">5</portee>
-                <degat name="dégât">3</degat>
-                <description>épée</description>
+                <portee>5</portee>
+                <degat>3</degat>
                 <element>terre</element>
                 <rarete>rare</rarete>
                 <prix>500</prix>
@@ -144,7 +141,7 @@ Autres
 * --logo : le paramètre logo est optionnel et permet de rajouter un logo sur le document en haut à droite
 * --font : le paramètre font est optionnel et permet de remplacer la font par défaut par une autre font
   Attention, le dossier qui contiendra la font doit obligatoirement avoir les 4 fichiers suivants:
-  
+
   * CustomFont-BoldOblique.ttf
   * CustomFont-Bold.ttf
   * CustomFont-Oblique.ttf
