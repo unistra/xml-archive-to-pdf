@@ -64,6 +64,11 @@
       <xs:element type="xs:string" name="type"/>
       <xs:element type="fr:porteeType" name="portee" xmlns:fr="fr:unistra:di:archive:pathfinder:v1"/>
       <xs:element type="fr:degatType" name="degat" xmlns:fr="fr:unistra:di:archive:pathfinder:v1"/>
+      <xs:element name="description" type="xs:string"></xs:element>
+      <xs:element name="element" type="xs:string"></xs:element>
+      <xs:element name="rarete" type="xs:string"></xs:element>
+      <xs:element name="prix" type="xs:int"></xs:element>
+      <xs:element name="qualite" type="xs:string"></xs:element>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="armesType">

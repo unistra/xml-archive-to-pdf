@@ -85,21 +85,41 @@ Exemple d'un fichier xml
                 <type>à deux mains</type>
                 <portee name="portée">3</portee>
                 <degat name="dégât">7</degat>
+                <description>cimeterre</description>
+                <element>feu</element>
+                <rarete>épique</rarete>
+                <prix>1000</prix>
+                <qualite>très bonne</qualite>
             </arme>
             <arme>
                 <nom>arc</nom>
                 <type>à distance</type>
                 <portee name="portée">8</portee>
                 <degat name="dégât">2</degat>
+                <description>arc</description>
+                <element>glace</element>
+                <rarete>simple</rarete>
+                <prix>100</prix>
+                <qualite>mauvaise</qualite>
             </arme>
             <arme>
                 <nom>épée</nom>
                 <type>à une main</type>
                 <portee name="portée">5</portee>
                 <degat name="dégât">3</degat>
+                <description>épée</description>
+                <element>terre</element>
+                <rarete>rare</rarete>
+                <prix>500</prix>
+                <qualite>moyenne</qualite>
             </arme>
         </armes>
+        <familier>
+            <nom>ronron</nom>
+            <type>sanglier</type>
+        </familier>
     </personnage>
+
 
 Légende de l'exemple
 ********************
@@ -110,7 +130,8 @@ attributs
 * name : intitulé parlant qui servira de label/titre à la place du nom du tag
 * style : style d'un bloc
 
-  * table: affichage sous forme d'un tableau
+  * table: affichage sous forme d'un tableau. Le tableau se redimensionne automatiquement en fonction du nombre de colonnes.
+    Attention néanmoins à ne pas utiliser trop de colonnes ou des éléments trop gros, car le rendu pourrait ne pas correspondre vos attentes.
 
 
 Résultat

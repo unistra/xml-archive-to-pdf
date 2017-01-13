@@ -76,4 +76,4 @@ def get_table_style(level):
         ('ALIGN', (1,1), (-1,-1), 'RIGHT'),
         ('INNERGRID', (0,0), (-1,-1), 0.25, colors.HexColor("#ccd9ff")),
         ('BOX', (0,0), (-1,-1), 2, "#99b3ff")
-    ], hAlign='LEFT')
+    ], hAlign='LEFT',wordWrap = 'LTR')

@@ -7,6 +7,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, Table, Indenter
 from .styles import get_styles, get_title_style, get_normal_style, get_table_style
 from .settings import *
+from reportlab.lib.units import mm
 
 
 def get_bare_tag(elem):
@@ -43,9 +44,15 @@ def add_logo(Story, logo_file):
     Story.append(Spacer(1, SPACE_UNIT))
 
 
+def ptTomm(pt):
+    """ convert pt to mm """
+    return pt * 0.352778
+
+
 def write_table(Story, e, level, styles):
     """ write a full table """
     data = []
+    colWidths = []
     # On récupère les lignes
     rows = e.getchildren()
     label = get_label(e)
@@ -56,21 +63,22 @@ def write_table(Story, e, level, styles):
     # On affiche le table
     if rows:
         # On récupère les titres du tableau à partir du 1er element
-        columns_names = list(map(lambda x: get_label(x), rows[0].getchildren()))
+        columns_names = list(map(lambda x: Paragraph(get_label(x), styles['BodyText']), rows[0].getchildren()))
         data.append(columns_names)
+        colWidths = [((ptTomm(letter[0])-(SPACE_UNIT*2))/len(columns_names))*mm for i in range(0, len(columns_names))]
         # On parcourt les éléments pour les insérer dans le tableau
         for row in rows:
             values = row.getchildren()
             if len(columns_names) != len(values):
                 raise Exception("Table with columns {} has wrong elements".format(columns_names))
-            line_values = list(map(lambda x: get_clean_text(x), row.getchildren()))
+            line_values = list(map(lambda x: Paragraph(get_clean_text(x), styles['BodyText']), row.getchildren()))
             data.append(line_values)
     # Build the table
-    t = Table(data)
+    t = Table(data, colWidths=colWidths)
     t.setStyle(get_table_style(level))
-    Story.append(Indenter(left=(level*SPACE_UNIT)))
+    # Story.append(Indenter(left=(level*SPACE_UNIT)))
     Story.append(t)
-    Story.append(Indenter(left=-level*SPACE_UNIT))
+    # Story.append(Indenter(left=-level*SPACE_UNIT))
     return Story
 
 
