@@ -1,12 +1,10 @@
 import unittest
-from xml_archive_to_pdf.utils import build_pdf
 import os.path
-
 from xml_archive_to_pdf.main import main
 
 
 """
-Utils unit tests
+Main unit tests
 """
 
 
