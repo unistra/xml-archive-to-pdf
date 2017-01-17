@@ -88,17 +88,20 @@ def write_table(Story, e, level, styles):
         # On parcourt les éléments pour les insérer dans le tableau
         for row in rows:
             values = row.getchildren()
+            if not values or has_children(values[0]):
+                raise Exception("Table {} has malformed elements".format(label))
             if len(columns_names) != len(values):
-                raise Exception("Table with columns {} has wrong elements".format(columns_names))
-            line_values = list(map(lambda x: Paragraph(get_clean_text(x), styles['cBodyText']), row.getchildren()))
+                raise Exception("Table {} has wrong elements".format(label))
+            line_values = list(map(lambda x: Paragraph(get_clean_text(x), styles['cBodyText']), values))
             data.append(line_values)
-    # Build the table
-    t = Table(data, colWidths=colWidths)
-    #t.setStyle(get_table_style(level))
-    t.setStyle(get_table_style())
-    # Story.append(Indenter(left=(level*SPACE_UNIT)))
-    Story.append(t)
-    # Story.append(Indenter(left=-level*SPACE_UNIT))
+
+        # Build the table
+        t = Table(data, colWidths=colWidths)
+        #t.setStyle(get_table_style(level))
+        t.setStyle(get_table_style())
+        # Story.append(Indenter(left=(level*SPACE_UNIT)))
+        Story.append(t)
+        # Story.append(Indenter(left=-level*SPACE_UNIT))
     return Story
 
 
