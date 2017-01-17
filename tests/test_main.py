@@ -23,6 +23,8 @@ class MainTest(unittest.TestCase):
         }
 
     def test_main(self):
+        if os.path.exists(self.pdf_file):
+            os.remove(self.pdf_file)
         main(args=self.args)
         self.assertTrue(os.path.exists(self.pdf_file))
         self.assertTrue(os.path.getsize(self.pdf_file) > 0)

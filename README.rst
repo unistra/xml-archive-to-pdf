@@ -41,8 +41,18 @@ En amont, il faudra s'assurer que le fichier xml soit validé par un schéma xsd
 On aura principalement :
 
 * Des blocs séparés par des titres
-* Des clés avec un intitulé parlant
+* Des clés avec un intitulé parlant dans l'attribut name
 * Des valeurs
+* Une mise en forme de tableau dans l'attribut style
+
+Concernant le rendu des éléments dans le pdf :
+
+* Lorsque l'on met l'attribut *style="table"*, l'ensemble du bloc est affiché comme un tableau.
+  Le premier élément permet de définir le nom des colonnes. Tous les éléments suivants doivent avoir les mêmes colonnes.
+  Celui-ci doit être structuré de la même manière que l'exemple ci-dessous.
+* En dehors des tableaux, lorsqu'un tag possède des enfants, c'est que c'est un titre. Sinon, c'est un ensemble clé-valeur.
+* Il y 6 niveaux d'indentation maximum et les tableaux ne sont pas indentés
+* Pour les labels, si l'attribut name est rempli, on l'utilise. S'il est absent, on utilise le nom du tag et s'il est vide, on met un blanc.
 
 
 Exemple d'un fichier xml

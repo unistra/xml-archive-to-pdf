@@ -48,7 +48,7 @@ def get_styles(fontFamily=DEFAULT_FONT):
     # BodyText
     styles.add(ParagraphStyle(name='cBodyText', fontName=fontFamily, parent=styles['BodyText']))
     # Italic
-    styles.add(ParagraphStyle(name='cItalic', fontName=fontFamily, parent=styles['Italic']))
+    styles.add(ParagraphStyle(name='cItalic', fontName="{}-Oblique".format(fontFamily), parent=styles['Italic']))
 
     return styles
 
@@ -73,7 +73,7 @@ def get_normal_style(styles, level):
         return styles["cNormal6"]
 
 
-def get_table_style(level):
+def get_table_style():
     """ get table style """
     return TableStyle([
         ('BACKGROUND',(0,0),(-1,0),colors.HexColor("#ccd9ff")),

@@ -94,7 +94,8 @@ def write_table(Story, e, level, styles):
             data.append(line_values)
     # Build the table
     t = Table(data, colWidths=colWidths)
-    t.setStyle(get_table_style(level))
+    #t.setStyle(get_table_style(level))
+    t.setStyle(get_table_style())
     # Story.append(Indenter(left=(level*SPACE_UNIT)))
     Story.append(t)
     # Story.append(Indenter(left=-level*SPACE_UNIT))
@@ -117,13 +118,13 @@ def write_elem(Story, e, level, styles):
     # C'est un element de type clé-valeur, on l'affiche normalement
     else:
         if label or value:
-            Story.append(Paragraph("{}: {}".format(label, value), get_normal_style(styles, level)))
+            Story.append(Paragraph("{} : {}".format(label, value), get_normal_style(styles, level)))
     return Story
 
 
-def is_writable_element(e, action, in_table):
+def is_writable_element(e, action, table_level):
     """ return true if the element is writable """
-    return ET.iselement(e) and action == EVENT_START and not in_table[0]
+    return ET.iselement(e) and action == EVENT_START and not table_level[0]
 
 
 def calcul_level(action, level):
