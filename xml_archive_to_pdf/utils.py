@@ -121,7 +121,7 @@ def write_elem(Story, e, level, styles):
     # C'est un element de type clé-valeur, on l'affiche normalement
     else:
         if label or value:
-            Story.append(Paragraph("{} : {}".format(label, value), get_normal_style(styles, level)))
+            Story.append(Paragraph("<b>{} :</b> {}".format(label, value), get_normal_style(styles, level)))
     return Story
 
 
