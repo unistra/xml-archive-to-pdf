@@ -22,7 +22,7 @@
             <!-- Lorsqu'il n'y a pas d'attribut name, on affiche le nom du tag. Ici classe -->
             <classe>
                 <nom>Moine</nom>
-                <niveau>2</niveau>
+                <niveau></niveau>
             </classe>
         </classes>
     </etat-civil>

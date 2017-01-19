@@ -20,7 +20,7 @@ def get_bare_tag(elem):
 
 def get_clean_text(elem):
     """ return value without line breaker chars """
-    return re.sub(r"[\f\n\r\t\v]", "", elem.text).strip()
+    return re.sub(r"[\f\n\r\t\v]", "", elem.text).strip() if elem.text else ""
 
 
 def get_doc(pdf_file):
