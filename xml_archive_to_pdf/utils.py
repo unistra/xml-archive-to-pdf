@@ -83,7 +83,7 @@ def write_table(Story, e, level, styles):
     # On affiche le table
     if rows:
         # On récupère les titres du tableau à partir du 1er element
-        columns_names = list(map(lambda x: Paragraph(get_label(x), styles['cBodyText']), rows[0].getchildren()))
+        columns_names = list(map(lambda x: Paragraph("{}{}{}".format("<b>", get_label(x), "</b>"), styles['cBodyText']), rows[0].getchildren()))
         data.append(columns_names)
         colWidths = [((ptTomm(letter[0])-(SPACE_UNIT*2))/len(columns_names))*mm for i in range(0, len(columns_names))]
         # On parcourt les éléments pour les insérer dans le tableau
