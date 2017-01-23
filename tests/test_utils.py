@@ -142,7 +142,7 @@ class UtilsTest(unittest.TestCase):
         self.assertEqual(Story[0].style.name, "cHeading1")
         # key value
         elem = self.tree.find(".//{fr:unistra:di:archive:pathfinder:v1}age")
-        write_elem(Story, elem, 2, get_styles())
+        write_elem(Story, elem, 2, get_styles(), 2)
         self.assertEqual(len(Story), 2)
         self.assertEqual(Story[1].text, "<b>son âge :</b> 20")
         self.assertEqual(Story[1].style.name, "cNormal2")

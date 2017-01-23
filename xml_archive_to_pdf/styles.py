@@ -63,14 +63,17 @@ def get_title_style(styles, level):
         return styles["cItalic"]
 
 
-def get_normal_style(styles, level):
+def get_normal_style(styles, level, odd_even_back=0):
     """ get title style by level """
     if level == 0:
-        return styles["cNormal"]
+        style = styles["cNormal"]
     elif level in [1, 2, 3, 4, 5, 6]:
-        return styles["{}{}".format("cNormal", str(level))]
+        style = styles["{}{}".format("cNormal", str(level))]
     else:
-        return styles["cNormal6"]
+        style = styles["cNormal6"]
+    if odd_even_back:
+        style.backColor = colors.HexColor("#e6ecff") if odd_even_back % 2 == 0 else colors.HexColor("#ffffff")
+    return style
 
 
 def get_table_style():

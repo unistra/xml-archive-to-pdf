@@ -11,6 +11,7 @@ from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from os.path import join
+from copy import copy
 
 
 def get_bare_tag(elem):
@@ -105,7 +106,7 @@ def write_table(Story, e, level, styles):
     return Story
 
 
-def write_elem(Story, e, level, styles):
+def write_elem(Story, e, level, styles, odd_even_back=0):
     """ write element in the pdf """
     # get label and value
     label = get_label(e)
@@ -121,7 +122,9 @@ def write_elem(Story, e, level, styles):
     # C'est un element de type clé-valeur, on l'affiche normalement
     else:
         if label or value:
-            Story.append(Paragraph("<b>{} :</b> {}".format(label, value), get_normal_style(styles, level)))
+            # copy style for odd/even background
+            style = copy(get_normal_style(styles, level, odd_even_back))
+            Story.append(Paragraph("<b>{} :</b> {}".format(label, value), style))
     return Story
 
 
@@ -162,11 +165,13 @@ def build_pdf(xml_file, pdf_file, logo_file=None, font_folder=None):
         add_logo(Story, logo_file)
     # Variable to know if the element is a table
     table_level = (False, 0)
+    count = 0
     # Parse the full xml
     for action, e in ET.iterparse(xml_file, events=(EVENT_START, EVENT_END)):
         # If a new element is encountered
         # Ignore elements in a table (because the table is builded entirely before)
         if is_writable_element(e, action, table_level):
+            count += 1
             # For style table
             attr_style = e.attrib.get(ATTR_STYLE)
             # Build a full table
@@ -175,7 +180,7 @@ def build_pdf(xml_file, pdf_file, logo_file=None, font_folder=None):
                 Story = write_table(Story, e, level, styles)
             # For title and simple key value
             else:
-                Story = write_elem(Story, e, level, styles)
+                Story = write_elem(Story, e, level, styles, count)
         # Calcul the level
         level = calcul_level(action, level)
         # Leave a table
