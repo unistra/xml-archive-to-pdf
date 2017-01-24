@@ -146,6 +146,12 @@ class UtilsTest(unittest.TestCase):
         self.assertEqual(len(Story), 2)
         self.assertEqual(Story[1].text, "<b>son âge :</b> 20")
         self.assertEqual(Story[1].style.name, "cNormal2")
+        # forced title
+        elem = self.tree.find(".//{fr:unistra:di:archive:pathfinder:v1}quetes")
+        write_elem(Story, elem, 1, get_styles())
+        self.assertEqual(len(Story), 3)
+        self.assertEqual(Story[2].text, "Quêtes en cours")
+        self.assertEqual(Story[2].style.name, "cHeading1")
 
     def test_is_writable_element(self):
         elem = self.tree.find(".//{fr:unistra:di:archive:pathfinder:v1}etat-civil")

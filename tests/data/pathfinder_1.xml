@@ -26,6 +26,7 @@
             </classe>
         </classes>
     </etat-civil>
+    <quetes style="title" name="Quêtes en cours" />
     <!-- Element de style tableau -->
     <armes style="table" name="Liste des armes">
         <arme>

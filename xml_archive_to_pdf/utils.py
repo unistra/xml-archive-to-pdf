@@ -111,8 +111,9 @@ def write_elem(Story, e, level, styles, odd_even_back=0):
     # get label and value
     label = get_label(e)
     value = get_clean_text(e)
-    # Gestion des titres: un titre est un élément avec des enfants
-    if has_children(e):
+    # Gestion des titres: un titre est un élément avec des enfants ou avec un style title
+    attr_style = e.attrib.get(ATTR_STYLE)
+    if has_children(e) or (attr_style and attr_style == ATTR_STYLE_TITLE):
         # Si on a un label non vide, on l'affiche
         if label:
             Story.append(Paragraph(label, get_title_style(styles, level)))

@@ -88,6 +88,7 @@ Exemple d'un fichier xml
                 </classe>
             </classes>
         </etat-civil>
+        <quetes style="title" name="Quêtes en cours" />
         <!-- Element de style tableau -->
         <armes style="table" name="Liste des armes">
             <arme>
@@ -139,6 +140,8 @@ attributs
 
   * table: affichage sous forme d'un tableau. Le tableau se redimensionne automatiquement en fonction du nombre de colonnes.
     Attention néanmoins à ne pas utiliser trop de colonnes ou des éléments trop gros, car le rendu pourrait ne pas correspondre vos attentes.
+  * title: permet de forcer l'affichage sous forme de titre. Ca peut être utile dans le cas où on veut afficher un tag vide comme un titre et
+    non pas comme une clé/valeur.
 
 
 Résultat
