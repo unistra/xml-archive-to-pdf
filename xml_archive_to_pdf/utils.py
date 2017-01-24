@@ -95,14 +95,10 @@ def write_table(Story, e, level, styles):
                 raise Exception("Table {} has wrong elements".format(label))
             line_values = list(map(lambda x: Paragraph(get_clean_text(x), styles['cBodyText']), values))
             data.append(line_values)
-
         # Build the table
         t = Table(data, colWidths=colWidths)
-        #t.setStyle(get_table_style(level))
         t.setStyle(get_table_style())
-        # Story.append(Indenter(left=(level*SPACE_UNIT)))
         Story.append(t)
-        # Story.append(Indenter(left=-level*SPACE_UNIT))
     return Story
 
 
@@ -132,6 +128,12 @@ def write_elem(Story, e, level, styles, odd_even_back=0):
 def is_writable_element(e, action, table_level):
     """ return true if the element is writable """
     return ET.iselement(e) and action == EVENT_START and not table_level[0]
+
+
+def is_started_table(e, action, table_level):
+    """ return true if the element is writable """
+    return ET.iselement(e) and action == EVENT_START and not table_level[0] and \
+        e.attrib.get(ATTR_STYLE) and e.attrib.get(ATTR_STYLE) == ATTR_STYLE_TABLE
 
 
 def calcul_level(action, level):
@@ -169,23 +171,21 @@ def build_pdf(xml_file, pdf_file, logo_file=None, font_folder=None):
     count = 0
     # Parse the full xml
     for action, e in ET.iterparse(xml_file, events=(EVENT_START, EVENT_END)):
-        # If a new element is encountered
-        # Ignore elements in a table (because the table is builded entirely before)
-        if is_writable_element(e, action, table_level):
-            count += 1
-            # For style table
-            attr_style = e.attrib.get(ATTR_STYLE)
-            # Build a full table
-            if attr_style and attr_style == ATTR_STYLE_TABLE:
-                table_level = (True, level)
-                Story = write_table(Story, e, level, styles)
-            # For title and simple key value
-            else:
-                Story = write_elem(Story, e, level, styles, count)
+        # Check if a table start here
+        if is_started_table(e, action, table_level):
+            table_level = (True, level)
+        # Write title and simple key value
+        elif is_writable_element(e, action, table_level):
+            count += 1 # for odd/even
+            Story = write_elem(Story, e, level, styles, count)
+            e.clear()
         # Calcul the level
         level = calcul_level(action, level)
-        # Leave a table
+        # Write the table when living it
         if is_leaving_table(action, level, table_level):
             table_level = (False, 0)
+            Story = write_table(Story, e, level, styles)
+            e.clear()
+
     # build
     doc.build(Story)
