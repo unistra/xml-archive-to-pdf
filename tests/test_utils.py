@@ -2,7 +2,7 @@ import unittest
 import os
 from xml_archive_to_pdf.utils import get_bare_tag, get_clean_text, get_doc, \
 registerFont, get_label, has_children, add_logo, ptTomm, write_table, write_elem, \
-is_writable_element, calcul_level, is_leaving_table, build_pdf
+is_writable_element, calcul_level, is_leaving_table, build_pdf, is_started_table
 import xml.etree.cElementTree as ET
 from reportlab.pdfbase import pdfmetrics
 from reportlab.platypus.flowables import Image
@@ -160,6 +160,22 @@ class UtilsTest(unittest.TestCase):
         r = is_writable_element(elem, "start", (True, 1))
         self.assertFalse(r)
         r = is_writable_element(elem, "end", (False, 0))
+        self.assertFalse(r)
+
+    def test_is_started_tablet(self):
+        elem = self.tree.find(".//{fr:unistra:di:archive:pathfinder:v1}armes")
+        r = is_started_table(elem, "start", (False, 0))
+        self.assertTrue(r)
+        r = is_started_table(elem, "start", (True, 1))
+        self.assertFalse(r)
+        r = is_started_table(elem, "end", (False, 0))
+        self.assertFalse(r)
+        elem = self.tree.find(".//{fr:unistra:di:archive:pathfinder:v1}etat-civil")
+        r = is_started_table(elem, "start", (False, 0))
+        self.assertFalse(r)
+        r = is_started_table(elem, "start", (True, 1))
+        self.assertFalse(r)
+        r = is_started_table(elem, "end", (False, 0))
         self.assertFalse(r)
 
     def test_calcul_level(self):

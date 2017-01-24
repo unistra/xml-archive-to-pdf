@@ -132,8 +132,9 @@ def is_writable_element(e, action, table_level):
 
 def is_started_table(e, action, table_level):
     """ return true if the element is writable """
-    return ET.iselement(e) and action == EVENT_START and not table_level[0] and \
+    check = ET.iselement(e) and action == EVENT_START and not table_level[0] and \
         e.attrib.get(ATTR_STYLE) and e.attrib.get(ATTR_STYLE) == ATTR_STYLE_TABLE
+    return True if check else False
 
 
 def calcul_level(action, level):
@@ -181,7 +182,7 @@ def build_pdf(xml_file, pdf_file, logo_file=None, font_folder=None):
             e.clear()
         # Calcul the level
         level = calcul_level(action, level)
-        # Write the table when living it
+        # WARNING : Write the table when living it because of C, MALLOC AND MEMORY
         if is_leaving_table(action, level, table_level):
             table_level = (False, 0)
             Story = write_table(Story, e, level, styles)
