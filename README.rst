@@ -9,9 +9,17 @@ xml-archive-to-pdf
     :target: http://coveralls.io/r/unistra/xml-archive-to-pdf?branch=master
     :alt: Coverage
 
+.. image:: https://img.shields.io/badge/status-stable-green.svg
+    :target: https://gitlab.unistra.fr/di/alumni-forms
+    :alt: Status
+
 .. image:: https://img.shields.io/badge/python-3.4-blue.svg
     :target: https://www.python.org/download/releases/3.4.0/
     :alt: Python 3.4
+
+.. image:: https://img.shields.io/badge/licence-PSF-blue.svg
+    :target: https://docs.python.org/3/license.html
+    :alt: Licence
 
 Transformation d'un fichier xml de type *unistra:archive* en fichier pdf
 
