@@ -12,6 +12,31 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from os.path import join
 from copy import copy
+from reportlab.pdfgen import canvas
+
+
+class NumberedCanvas(canvas.Canvas):
+    def __init__(self, *args, **kwargs):
+        canvas.Canvas.__init__(self, *args, **kwargs)
+        self._saved_page_states = []
+
+    def showPage(self):
+        self._saved_page_states.append(dict(self.__dict__))
+        self._startPage()
+
+    def save(self):
+        """add page info to each page (page x of y)"""
+        num_pages = len(self._saved_page_states)
+        for state in self._saved_page_states:
+            self.__dict__.update(state)
+            self.draw_page_number(num_pages)
+            canvas.Canvas.showPage(self)
+        canvas.Canvas.save(self)
+
+    def draw_page_number(self, page_count):
+        self.setFont(DEFAULT_FONT, 10)
+        self.drawRightString(letter[0]-SPACE_UNIT*2, SPACE_UNIT,
+                             "%d/%d" % (self._pageNumber, page_count))
 
 
 def get_bare_tag(elem):
@@ -189,4 +214,4 @@ def build_pdf(xml_file, pdf_file, logo_file=None, font_folder=None):
             e.clear()
 
     # build
-    doc.build(Story)
+    doc.build(Story, canvasmaker=NumberedCanvas)
