@@ -5,8 +5,8 @@ import xml.etree.cElementTree as ET
 import re
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, Table, Indenter
-from .styles import get_styles, get_title_style, get_normal_style, get_table_style
-from .settings import *
+from xml_archive_to_pdf.styles import get_styles, get_title_style, get_normal_style, get_table_style
+from xml_archive_to_pdf.settings import *
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont

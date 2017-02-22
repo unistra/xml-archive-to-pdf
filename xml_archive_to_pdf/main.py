@@ -16,7 +16,7 @@ Options:
 """
 
 from docopt import docopt
-from .utils import build_pdf
+from xml_archive_to_pdf.utils import build_pdf
 import sys
 
 

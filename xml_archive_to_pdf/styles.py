@@ -1,7 +1,7 @@
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import TableStyle
-from .settings import *
+from xml_archive_to_pdf.settings import *
 from reportlab.lib.enums import TA_CENTER
 
 
