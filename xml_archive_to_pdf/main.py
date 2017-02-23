@@ -31,7 +31,7 @@ def main(args=None):
         build_pdf(xml_file, pdf_file, logo_file, font_folder)
     except Exception as e:
         sys.stderr.write(str(e))
-        exit(1)
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
