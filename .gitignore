@@ -7,6 +7,5 @@
 docs/_build/
 .coverage
 htmlcov
-dist
 .tox
 build
