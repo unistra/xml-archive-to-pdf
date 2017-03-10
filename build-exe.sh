@@ -22,7 +22,7 @@ PYTHON_FOLDER="c:\\Python3"
 PYTHON_LIBS_FOLDER="c:\\Python3\\Lib\\site-packages"
 PYTHON_SCRIPT_MAIN="xml_archive_to_pdf/main.py"
 # Exe
-EXE_NAME="xml-archive-to-pdf-1.0.8.exe"
+EXE_NAME="xml-archive-to-pdf-1.0.9.exe"
 EXE_DIST="dist"
 
 mkdir $TMP_FOLDER
