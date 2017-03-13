@@ -15,7 +15,7 @@ with open('requirements.txt') as requirements:
 
 setup(
     name='xml-archive-to-pdf',
-    version='1.0.9',
+    version='1.1.0',
     author='di-dip-unistra',
     author_email='di-dip@unistra.fr',
     maintainer='di-dip-unistra',
