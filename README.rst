@@ -21,10 +21,12 @@ xml-archive-to-pdf
     :target: https://docs.python.org/3/license.html
     :alt: Licence
 
-Transformation d'un fichier xml de type *unistra:archive* en fichier pdf
+Transformation d'un fichier xml de type *unistra:archive* en fichier pdf.
 
 Installation
 ------------
+
+L'application est déployée sur pypi. Il suffit donc de l'installer directement avec pip:
 
 .. code-block:: bash
 
@@ -33,9 +35,55 @@ Installation
 Usage
 -----
 
+Après l'installation, la commande *xml-archive-to-pdf* est disponible:
+
+.. code-block:: bash
+
+    xml-archive-to-pdf
+
+    Usage:
+        xml-archive-to-pdf (-i <xml_file>) (-o <pdf_file>)
+        xml-archive-to-pdf (-i <xml_file>) (-o <pdf_file>) -l <logo_file>
+        xml-archive-to-pdf (-i <xml_file>) (-o <pdf_file>) -f <font_folder>
+        xml-archive-to-pdf (-i <xml_file>) (-o <pdf_file>) -l <logo_file> -f <font_folder>
+
+    Options:
+        -h --help  aide
+        -i <xml_file>, --input <xml_file>
+        -o <pdf_file>, --output <pdf_file>
+        -l <logo_file>, --logo <logo_file>
+        -f <font_folder>, --font <font_folder>
+
+
+Exemple d'utilisation:
+
 .. code-block:: bash
 
     xml-archive-to-pdf -i tests/data/pathfinder_1.xml -o /tmp/pathfinder_1.pdf --logo tests/data/logo.png --font tests/data/CustomFont
+
+Développement
+-------------
+Créer l'environnement de développement:
+
+.. code-block:: bash
+
+    mkvirtualenv -p /usr/bin/python3.4 xml_archive_to_pdf
+    workon xml_archive_to_pdf
+    pip install -r requirements.txt
+    python setup.py develop
+
+Déployer sur pypi:
+
+.. code-block:: bash
+
+    python setup.py sdist upload
+
+Fabriquer un *exe* pour Windows :
+
+.. code-block:: bash
+
+    sudo apt install wine-development
+    ./build-exe.sh
 
 Documentation
 -------------
