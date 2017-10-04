@@ -85,6 +85,17 @@ Fabriquer un *exe* pour Windows :
     sudo apt install wine-development
     ./build-exe.sh
 
+Tests
+-----
+
+Pour lancer les tests unitaires, vous pouvez utiliser *tox*. Ce sont les tests exécutés par la CI :
+
+.. code-block:: bash
+
+    pip install tox
+    tox
+
+
 Documentation
 -------------
 
